@@ -1,0 +1,191 @@
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('https://t3.ftcdn.net/jpg/01/17/33/22/360_F_117332203_ekwDZkViF6M3itApEFRIH4844XjJ7zEb.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Segoe UI', sans-serif;
+}
+  
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f2f5;
+  }
+  
+  .signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  
+  .signup-title {
+    margin-bottom: 30px;
+    text-align: center;
+    color:whitesmoke;
+  }
+  
+  .input-group {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .input-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #888888;
+  }
+  
+  .input-group input {
+    width: 99%;
+    padding: 12px 12px 12px 40px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    top: 52%;
+    right: 16px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888888;
+  }
+  
+  .signup-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4a90e2;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .signup-button:hover {
+    background-color: #357ab8;
+  }
+  
+  .login-link {
+    margin-top: 15px;
+    text-align: center;
+    color: #fff6f6;
+  }
+  
+  .login-link a {
+    color: #4a90e2;
+    text-decoration: none;
+  }
+  
+  .login-link a:hover {
+    text-decoration: underline;
+  }
+  .divider {
+    text-align: center;
+    margin: 5px 0;
+    position: relative;
+}
+  
+  .divider span {
+    flex-grow: 1;
+    border-bottom: 1px solid #ccc;
+    margin: 0 10px;
+    color:whitesmoke;
+    background:none;
+  }
+  
+  .google-button {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color:black;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .google-button img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .google-button:hover {
+    background-color: #030101;
+  }
+  .google-button {
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .google-button:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .google-icon {
+    width: 20px;
+    height: 20px;
+  }
+      
+  .icon-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin: 10px auto;
+    transition: transform 0.2s;
+  }
+  
+  .icon-button img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .icon-button:hover {
+    transform: scale(1.1);
+  }
+  .terms {
+    color: #fbf5f5;
+    margin: 10px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .terms input[type="checkbox"] {
+    color:whitesmoke;
+    margin-right: 8px;
+  }
+  
+  .terms label a {
+    color: #0077b6;
+    text-decoration: underline;
+  }
+    
