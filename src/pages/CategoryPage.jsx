@@ -24,6 +24,11 @@ const dummyCategoryProducts = {
     { name: "Microwave Oven", brand:"Samsung",price: 8999, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqtJ0_WMAto3JBRgvfTdBN0J6707UqFLJj3Q&s" },
     { name: "Refrigerator", brand:"LG",price: 25999, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUx9bN1eWoW_2tTnZaPOH-zQQHIKjIArTG0g&s" },
   ],
+   Books: [
+     { name: "Atomic Habits", price: 599, brand: "Penguin", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdpr68FDh6xxaWIwFmu5mm3bYd0zBc503i5Q&s" },
+    { name: "The Psychology of Money", price: 399, brand: "Harriman House", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxNiEUY9dmXOPdrRZSc-Uzi6Qk5GXUf7sucg&s" },
+    { name: "Ikigai", price: 250,  brand: "Penguin", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHzQ4pycumT-eihOXuWT3B8r_BwsrLVrWlyg&s" },
+  ],
   "Beauty products": [
     { name: "Facial Cleanser", brand:"Cetaphil", price: 499, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRelu7vWR2Kzvg07jNJtgx8TyKpCMROQVpblw&s" },
     { name: "Soap", price: 799,  brand:"LUX",img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0qE-opWsX4GBSq_ZytwJqSaUiKRusN__WLA&s" },
@@ -35,14 +40,19 @@ const dummyCategoryProducts = {
     { name: "Walnuts", price: 1099, brand:"Happilo",img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ5rDUYeqDU_p0GDuHk7iWn9bv5TIi9vjMWg&s" },
   ],
   "Home Furnitures": [
-    { name: "Sofa Set", price: 19999,brand:"NutRaj", img: "https://example.com/sofa.jpg" },
-    { name: "Dining Table", price: 15999, brand:"NutRaj",img: "https://example.com/diningtable.jpg" },
-    { name: "Queen Bed", price: 24999, brand:"NutRaj",img: "https://example.com/bed.jpg" },
+    { name: "Sofa Set", price: 19999,brand:"Royalok", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRZDVh6kklPNEsj5U7pSdlfuq9fzCrEoH2fA&s" },
+    { name: "Dining Table", price: 15999, brand:"Sun furniture",img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG6e_zn4b-UyF9743JIErlKAhLlguZ41bxPQ&s" },
+    { name: "Queen Bed", price: 24999, brand:"wooden twist",img: "https://damroimages.blob.core.windows.net/damroimages/9186-1.jpg" },
   ],
   Kilos: [
-     { name: "Rice (5kg)", price: 399, img: "https://example.com/rice.jpg" },
-    { name: "Wheat Flour (5kg)", price: 299, img: "https://example.com/wheatflour.jpg" },
-    { name: "Sugar (5kg)", price: 250, img: "https://example.com/sugar.jpg" },
+     { name: "Rice (5kg)", price: 599,brand:"India Gate", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdpr68FDh6xxaWIwFmu5mm3bYd0zBc503i5Q&s" },
+    { name: "Wheat Flour (5kg)", price: 399,brand:"Pathanjali", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxNiEUY9dmXOPdrRZSc-Uzi6Qk5GXUf7sucg&s" },
+    { name: "Sugar (5kg)", price: 250,brand:"Madhur", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHzQ4pycumT-eihOXuWT3B8r_BwsrLVrWlyg&s" },
+  ],
+   "Toys and More": [
+     { name: "Remote Control Car", price: 599,brand:"cpt toys", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdpr68FDh6xxaWIwFmu5mm3bYd0zBc503i5Q&s" },
+    { name: "LEGO Classic Bricks Set", price: 399,brand: "LEGO", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxNiEUY9dmXOPdrRZSc-Uzi6Qk5GXUf7sucg&s" },
+    { name: "Rubik's Cube 3x3", price: 250,brand:"Funskool", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHzQ4pycumT-eihOXuWT3B8r_BwsrLVrWlyg&s" },
   ],
 };
 
