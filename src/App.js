@@ -8,6 +8,7 @@ import Cart from "./pages/cart";
 import CategoryPage from "./pages/CategoryPage";
 import Payment from"./pages/payment";
 import OrderConfirmed from "./pages/OrderConfirmed";
+import Error404 from"./pages/Error404";
 const App = () => {
   return (
     <Router>
@@ -21,6 +22,7 @@ const App = () => {
 <Route path="/category/:categoryName" element={<CategoryPage />} />
                <Route path="/payment" element={<Payment />} />
   <Route path="/order-confirmed" element={<OrderConfirmed />} /> {/* ✅ This route must be added */}
+  <Route path="/error-404" element={<Error404 />} />
 
 
 

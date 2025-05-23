@@ -1,60 +1,56 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const OrderConfirmed = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const product = location.state?.product;
-  const [showConfirmation, setShowConfirmation] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowConfirmation(true);
-    }, 2000); // Change to 120000 for 2 minutes if needed
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!showConfirmation) {
-    return (
-      <div style={{ padding: 20, textAlign: "center" }}>
-        <style>{`
-          .spinner {
-            margin: 0 auto;
-            border: 6px solid #caf0f8;
-            border-top: 6px solid #0077b6;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-          }
-
-          @keyframes spin {
-            to { transform: rotate(360deg); }
-          }
-        `}</style>
-        <div className="spinner"></div>
-        <p style={{ marginTop: 10, color: "#0077b6" }}>Confirming your order...</p>
-      </div>
-    );
-  }
+    if (!product) navigate("/");
+  }, [product, navigate]);
 
   return (
     <div style={{ padding: 20, textAlign: "center" }}>
-      <h2>✅ Order Confirmed</h2>
+      <style>{`
+        .checkmark {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          display: inline-block;
+          border: 5px solid #00b894;
+          position: relative;
+        }
+        .checkmark::after {
+          content: '';
+          position: absolute;
+          left: 22px;
+          top: 10px;
+          width: 20px;
+          height: 40px;
+          border-right: 5px solid #00b894;
+          border-bottom: 5px solid #00b894;
+          transform: rotate(45deg);
+          animation: draw 0.5s ease-out;
+        }
+        @keyframes draw {
+          from { height: 0; width: 0; }
+          to { height: 40px; width: 20px; }
+        }
+      `}</style>
+
+      <div className="checkmark"></div>
+      <h2 style={{ color: "#00b894", marginTop: 20 }}>Payment Successful!</h2>
       <p>Thank you for your purchase.</p>
       {product && (
         <>
-          <img
-            src={product.img}
-            alt={product.name}
-            style={{ width: 200, marginBottom: 10 }}
-          />
-          <h3>{product.name}</h3>
-          <p>Paid: ₹{product.price.toLocaleString()}</p>
+          <p><strong>Product:</strong> {product.name}</p>
+          <p><strong>Amount:</strong> ₹{product.price}</p>
         </>
       )}
-      <Link to="/welcome" style={{ marginTop: 20, display: "inline-block" }}>
-        ⬅️ Back to Home
-      </Link>
+      <p style={{ marginTop: 20, fontSize: 14 }}>
+        📧 A confirmation email has been sent to your registered email.
+      </p>
     </div>
   );
 };

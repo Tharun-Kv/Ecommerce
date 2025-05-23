@@ -6,7 +6,7 @@ import "./category.css";
 const dummyCategoryProducts = {
   Mobiles: [
     { name: "iPhone 14", brand: "Apple", price: 79999, img: "https://m.media-amazon.com/images/I/61cwywLZR-L._SX679_.jpg" },
-    { name: "Samsung Galaxy S22", brand: "Samsung", price: 69999, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5x7kbFyH-kUx4HnmNQ91t9zckl6w41zUHrQ&s" },
+    { name: "Samsung Galaxy S22", brand: "npm startSamsung", price: 69999, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5x7kbFyH-kUx4HnmNQ91t9zckl6w41zUHrQ&s" },
     { name: "Nothing Phone 1", brand: "Nothing", price: 39999, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBSOmWUmFSNQS4-r0HetgmU8uZRJ608k3Jqw&s" },
   ],
   Electronics: [
