@@ -40,11 +40,11 @@ const PaymentPage = () => {
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
         <style>{`
           .spinner {
-            border: 8px solid #caf0f8;
-            border-top: 8px solid #0077b6;
+            border: 4px solid #caf0f8;
+            border-top: 4px solid #0077b6;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 30px;
+            height: 30px;
             animation: spin 1s linear infinite;
           }
 
@@ -113,7 +113,7 @@ const PaymentPage = () => {
         {paymentMethod === "qr" && (
           <div style={{ marginTop: 20 }}>
             <p>Scan below QR with any UPI app:</p>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/QR_code_example.png" width="150" alt="QR Code" />
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay" width="150" alt="QR Code" />
           </div>
         )}
 

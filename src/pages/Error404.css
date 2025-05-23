@@ -2,7 +2,7 @@
 
 .page_404 {
   padding: 40px 0;
-  background: #fff;
+  background: #ffffff;
   font-family: 'Arial', sans-serif;
   text-align: center;
 }
@@ -17,16 +17,18 @@
 
 .four_zero_four_bg h1 {
   font-size: 80px;
+  color: darkred;
 }
 
 .contant_box_404 {
   margin-top: -50px;
+  color: red;
 }
 
 .link_404 {
   color: #fff !important;
   padding: 10px 20px;
-  background: #39ac31;
+  background: #1de656;
   margin: 20px 0;
   display: inline-block;
   border: none;
