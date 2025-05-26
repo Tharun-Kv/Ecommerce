@@ -61,7 +61,7 @@ const CategoryPage = () => {
   const products = dummyCategoryProducts[categoryName] || [];
 
   const [selectedBrands, setSelectedBrands] = useState([]);
-  const [priceRange, setPriceRange] = useState("");
+    const [sliderPrice, setSliderPrice] = useState(100000);
   const [filteredProducts, setFilteredProducts] = useState(products);
 
   const brands = [...new Set(products.map(p => p.brand))];
@@ -72,9 +72,7 @@ const CategoryPage = () => {
     );
   };
 
-  const handlePriceChange = (range) => {
-    setPriceRange(range);
-  };
+ 
 
   const navigate = useNavigate();
 
@@ -88,17 +86,9 @@ const handleBuyNow = (item) => {
     if (selectedBrands.length > 0) {
       result = result.filter(p => selectedBrands.includes(p.brand));
     }
-
-    if (priceRange) {
-      if (priceRange === "low") result = result.filter(p => p.price < 10000);
-      else if (priceRange === "mid") result = result.filter(p => p.price >= 10000 && p.price <= 50000);
-      else if (priceRange === "high") result = result.filter(p => p.price > 50000);
-    }
-
+    result = result.filter(p => p.price <= sliderPrice);
     setFilteredProducts(result);
   };
-
- 
   
 
   const handleAddToCart = (item) => {
@@ -124,13 +114,17 @@ const handleBuyNow = (item) => {
           ))}
         </div>
 
-        <div className="filter-section">
-          <h4>Price</h4>
-          <label><input type="radio" name="price" onChange={() => handlePriceChange("low")} /> Under ₹10,000</label>
-          <label><input type="radio" name="price" onChange={() => handlePriceChange("mid")} /> ₹10,000 - ₹50,000</label>
-          <label><input type="radio" name="price" onChange={() => handlePriceChange("high")} /> ₹50,000+</label>
-        </div>
-
+        <div className="price-filter">
+  <h4>Max Price: ₹{sliderPrice}</h4>
+  <input
+    type="range"
+    min="0"
+    max="100000"
+    step="100"
+    value={sliderPrice}
+    onChange={(e) => setSliderPrice(Number(e.target.value))}
+  />
+</div>
         <button className="btn apply-btn" onClick={applyFilters}>Apply Filters</button>
       </aside>
 
