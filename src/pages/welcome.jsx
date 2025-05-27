@@ -8,8 +8,8 @@ const Welcome = () => {
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState(null);
   
-  const [cart, setCart] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [, setCart] = useState([]);
+  const [searchQuery, ] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -95,47 +95,6 @@ const handleBuyNow = (product) => {
 
   return (
     <div className="welcome-container">
-      {/* Header */}
-      <header className="header">
-        <div className="logo">Ecommers</div>
-        <div className="search-bar">
-  <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search Icon" className="search-icon-logo" />
-  <input
-    type="text"
-    placeholder="Search for products, brands, and more"
-    value={searchQuery}
-    onChange={(e) => setSearchQuery(e.target.value)}
-  />
-  {searchQuery && (
-    <>
-      <span className="clear-search" onClick={() => setSearchQuery("")}>×</span>
-      <ul className="suggestion-dropdown">
-        {[...filteredProducts, ...filteredCategories].slice(0, 5).map((item, idx) => (
-          <li key={idx} onClick={() => setSearchQuery(item.name)}>
-            {item.name}
-          </li>
-        ))}
-      </ul>
-    </>
-  )}
-</div>
-
-        <div className="nav-links">
-          <Link to="/login">
-            <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" alt="Login Icon" className="login-icon" />
-            Login
-          </Link>
-          <Link to="/cart" state={{ cart }}>
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png"
-              alt="Cart Logo"
-              style={{ width: "20px", height: "20px", marginRight: "6px" }}
-            />
-            Cart
-          </Link>
-        </div>
-      </header>
-
       {/* Hero Banner */}
       <section className="hero-banner">
         <img src="https://t4.ftcdn.net/jpg/02/49/50/15/360_F_249501541_XmWdfAfUbWAvGxBwAM0ba2aYT36ntlpH.jpg" alt="Hero Banner" className="hero-image" />
@@ -201,11 +160,6 @@ const handleBuyNow = (product) => {
           </div>
         </div>
       )}
-
-      {/* Footer */}
-      <footer className="footer">
-        <p>© 2025 Ecommers</p>
-      </footer>
     </div>
   );
 };

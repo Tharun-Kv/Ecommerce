@@ -83,7 +83,7 @@ const OrderConfirmed = () => {
         </>
       )}
       <p style={{ marginTop: 20, fontSize: 14 }}>
-        📧 A confirmation email has been sent to your registered email.
+       <h3> 📧 A confirmation email has been sent to your registered email.</h3>
       </p>
       
 <button
