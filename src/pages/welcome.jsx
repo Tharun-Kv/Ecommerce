@@ -1,40 +1,55 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./welcome.css";
 
 const Welcome = () => {
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  
-  const [, setCart] = useState([]);
-  const [searchQuery, ] = useState("");
+  const [ setCart] = useState([]);
+  const [searchQuery] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 
+  
+  const images = [
+    "https://t4.ftcdn.net/jpg/02/49/50/15/360_F_249501541_XmWdfAfUbWAvGxBwAM0ba2aYT36ntlpH.jpg",
+    "https://t3.ftcdn.net/jpg/04/65/46/52/360_F_465465254_1pN9MGrA831idD6zIBL7q8rnZZpUCQTy.jpg",
+    "https://graphicsfamily.com/wp-content/uploads/edd/2021/07/Professional-E-Commerce-Shoes-Banner-Design.jpg",
+    "https://img.freepik.com/free-psd/black-friday-super-sale-facebook-cover-banner-template_120329-5177.jpg?semt=ais_items_boosted&w=740",
+    "https://marketplace.canva.com/EAGYmbXgp2Q/1/0/1600w/canva-blue-and-white-modern-fashion-store-banner-E8NwvwOxigg.jpg"
+  ];
+
+ useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
+  }, 4000);
+  return () => clearInterval(interval);
+}, [images.length]);
+
   const openProductModal = (product) => setSelectedProduct(product);
   const closeProductModal = () => setSelectedProduct(null);
- 
 
   const handleAddToCart = (product) => {
     setCart((prev) => [...prev, product]);
     alert(`${product.name} added to cart!`);
   };
-  const navigate = useNavigate();
 
-const handleBuyNow = (product) => {
-  navigate("/payment", {
-    state: {
-      name: product.name,
-      price: product.price,
-      img: product.img
-    },
-  });
-};
+  const handleBuyNow = (product) => {
+    navigate("/payment", {
+      state: {
+        name: product.name,
+        price: product.price,
+        img: product.img,
+      },
+    });
+  };
 
   const categories = [
     { name: "Mobiles", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIsVyKiHRsRddFbMcW4Lr67odMgAqmppsWjw&s", description: "Latest smartphones and accessories." },
@@ -76,6 +91,7 @@ const handleBuyNow = (product) => {
     }
   ];
 
+
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -97,7 +113,14 @@ const handleBuyNow = (product) => {
     <div className="welcome-container">
       {/* Hero Banner */}
       <section className="hero-banner">
-        <img src="https://t4.ftcdn.net/jpg/02/49/50/15/360_F_249501541_XmWdfAfUbWAvGxBwAM0ba2aYT36ntlpH.jpg" alt="Hero Banner" className="hero-image" />
+        {images.map((img, i) => (
+          <img
+            key={i}
+            src={img}
+            alt={`Slide ${i + 1}`}
+            className={`hero-image ${i === currentIndex ? "active" : ""}`}
+          />
+        ))}
       </section>
 
       {/* Categories */}
@@ -128,7 +151,11 @@ const handleBuyNow = (product) => {
         <div className="products">
           {filteredProducts.length ? (
             filteredProducts.map((product, idx) => (
-              <div key={idx} className="product-card" onClick={() => openProductModal(product)}>
+              <div
+                key={idx}
+                className="product-card"
+                onClick={() => openProductModal(product)}
+              >
                 <img src={product.img} alt={product.name} />
                 <h4>{product.name}</h4>
                 <p>{product.price}</p>
@@ -150,7 +177,9 @@ const handleBuyNow = (product) => {
             <img src={selectedProduct.img} alt={selectedProduct.name} />
             <div className="modal-info">
               <h2>{selectedProduct.name}</h2>
-              <p><strong>Price:</strong> {selectedProduct.price}</p>
+              <p>
+                <strong>Price:</strong> {selectedProduct.price}
+              </p>
               <p>{selectedProduct.description}</p>
               <div className="modal-buttons">
                 <button className="btn buy-btn" onClick={() => handleBuyNow(selectedProduct)}>Buy Now</button>

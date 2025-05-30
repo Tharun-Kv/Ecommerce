@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"; // 👈 Added Navigate
 import Login from "./pages/Login";
 import Signup from "./pages/signup";
 import Terms from "./pages/terms";
@@ -16,13 +16,15 @@ import { SearchProvider } from "./pages/search";
 const App = () => {
   return (
     <Router>
-      <SearchProvider> {/* Wrap here */}
+      <SearchProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
+          {/* 👇 Redirect root path to login */}
+          <Route path="/" element={<Navigate to="/login" />} />
+
           <Route element={<Layout />}>
-            <Route path="/" element={<Welcome />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/cart" element={<Cart />} />

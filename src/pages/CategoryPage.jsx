@@ -50,9 +50,9 @@ const dummyCategoryProducts = {
     { name: "Sugar (5kg)", price: 250,brand:"Madhur", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHzQ4pycumT-eihOXuWT3B8r_BwsrLVrWlyg&s" },
   ],
    "Toys and More": [
-     { name: "Remote Control Car", price: 599,brand:"cpt toys", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdpr68FDh6xxaWIwFmu5mm3bYd0zBc503i5Q&s" },
-    { name: "LEGO Classic Bricks Set", price: 399,brand: "LEGO", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxNiEUY9dmXOPdrRZSc-Uzi6Qk5GXUf7sucg&s" },
-    { name: "Rubik's Cube 3x3", price: 250,brand:"Funskool", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHzQ4pycumT-eihOXuWT3B8r_BwsrLVrWlyg&s" },
+     { name: "Remote Control Car", price: 599,brand:"cpt toys", img: "https://images.jdmagicbox.com/comp/bangalore/e8/080pxx80.xx80.230711192913.v7e8/catalogue/cpt-toys-rmv-extension-2nd-stage-bangalore-toy-dealers-z7binljm6b-250.jpg?clr=#5a330c" },
+    { name: "LEGO Classic Bricks Set", price: 399,brand: "LEGO", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNp1UENNrze5hLxbE15OBwhkwq511O2QR0AA&s" },
+    { name: "Rubik's Cube 3x3", price: 250,brand:"Funskool", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGSnoemSOIW7b92stk0ipFFUfu8SR9bw3CpQ&s" },
   ],
 };
 
