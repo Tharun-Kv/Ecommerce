@@ -120,7 +120,9 @@ const Welcome = () => {
             alt={`Slide ${i + 1}`}
             className={`hero-image ${i === currentIndex ? "active" : ""}`}
           />
+          
         ))}
+        
       </section>
 
       {/* Categories */}

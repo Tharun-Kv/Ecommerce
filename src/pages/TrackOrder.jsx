@@ -6,7 +6,7 @@ const TrackOrder = () => {
 
   const handleTrackOrder = () => {
     alert(`Tracking Order:\nOrder ID: ${orderId}\nEmail: ${email}`);
-    // You can replace alert with real API call logic
+    
   };
 
   return (
