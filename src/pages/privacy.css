@@ -1,0 +1,94 @@
+/* PrivacyPage.css */
+
+body {
+  background-color: #0f0f0f;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+.privacy-container {
+  padding: 3rem 5%;
+  background: radial-gradient(circle at center, #1c1f2b 0%, #0f0f0f 100%);
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.privacy-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.privacy-header h1 {
+  font-size: 3rem;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(90deg, #48cae4, #00b4d8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fadeInUp 1.2s ease-out forwards;
+}
+
+.privacy-header p {
+  color: #90e0ef;
+  font-size: 1rem;
+  animation: fadeInUp 1.4s ease-out forwards;
+}
+
+.privacy-section {
+  background-color: #1e1e1e;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 180, 216, 0.2);
+  animation: fadeInUp 1.5s ease-out forwards;
+}
+
+.privacy-section h2 {
+  font-family: 'Orbitron', sans-serif;
+  color: #00b4d8;
+  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
+}
+
+.privacy-section p {
+  color: #ade8f4;
+  font-size: 1rem;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.glitch-text {
+  font-size: 2rem;
+  color: #00b4d8;
+  text-align: center;
+  animation: glitch 1s infinite;
+  margin-top: 2rem;
+}
+
+@keyframes glitch {
+  0% { transform: translate(1px, 1px); }
+  20% { transform: translate(-1px, -2px); }
+  40% { transform: translate(-1px, 2px); }
+  60% { transform: translate(2px, 1px); }
+  80% { transform: translate(-1px, -1px); }
+  100% { transform: translate(1px, 2px); }
+}

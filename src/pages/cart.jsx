@@ -1,11 +1,18 @@
 // src/pages/Cart.jsx
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import "./cart.css";
 
 const Cart = () => {
-  const location = useLocation();
-  const cartItems = location.state?.cart || [];
+  const [cartItems, setCartItems] = useState([]);
+  
+
+  // Load cart items from localStorage
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setCartItems(JSON.parse(storedCart));
+    }
+  }, []);
 
   return (
     <div className="cart-container">
@@ -25,7 +32,15 @@ const Cart = () => {
           ))}
         </div>
       )}
+
+      
+      <button className="clear-cart-btn" onClick={() => {
+  localStorage.removeItem("cart");
+  setCartItems([]);
+}}>Clear Cart</button>
+
     </div>
+    
   );
 };
 

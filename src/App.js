@@ -12,6 +12,11 @@ import Error404 from "./pages/Error404";
 import TrackOrder from "./pages/TrackOrder";
 import Layout from "./pages/Layout"; // ✅ import
 import { SearchProvider } from "./pages/search";
+import About from "./pages/about";
+import Cancellationandrefund from "./pages/cancellationandrefund";
+import Profile from "./pages/Profile";
+import OrderHistory from "./pages/orderhistory";
+import Settings from  "./pages/t";
 
 const App = () => {
   return (
@@ -25,6 +30,11 @@ const App = () => {
           <Route path="/" element={<Navigate to="/login" />} />
 
           <Route element={<Layout />}>
+         <Route path="/orderhistory" element={<OrderHistory />} />
+          <Route path="/t" element ={<Settings />} />
+           <Route path="/profile" element={<Profile />}  />
+           <Route path="/cancellationandrefund" element={<Cancellationandrefund />}  />
+          <Route path="/about" element={<About/>}  />
             <Route path="/terms" element={<Terms />} />
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/cart" element={<Cart />} />

@@ -5,7 +5,6 @@ import "./welcome.css";
 const Welcome = () => {
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [ setCart] = useState([]);
   const [searchQuery] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
@@ -36,11 +35,13 @@ const Welcome = () => {
   const openProductModal = (product) => setSelectedProduct(product);
   const closeProductModal = () => setSelectedProduct(null);
 
-  const handleAddToCart = (product) => {
-    setCart((prev) => [...prev, product]);
-    alert(`${product.name} added to cart!`);
+ const handleAddToCart = (product) => {
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+    existingCart.push(product);
+    localStorage.setItem("cart", JSON.stringify(existingCart));
+    alert("Added to cart!");
   };
-
+ 
   const handleBuyNow = (product) => {
     navigate("/payment", {
       state: {
@@ -67,25 +68,25 @@ const Welcome = () => {
   const products = [
     {
       name: "Wireless Headphones",
-      price: "₹2,499",
+      price: "2,499",
       img: "https://hifimart.com/wp-content/uploads/ath-m50xbt2_01.webp",
       description: "High-quality wireless headphones with noise cancellation."
     },
     {
       name: "Smart Watch",
-      price: "₹3,999",
+      price: "3,999",
       img: "https://5.imimg.com/data5/SELLER/Default/2023/3/295734049/VT/VT/QY/185800596/boat-smartwatch-500x500.jpg",
       description: "Stylish smart watch with fitness tracking."
     },
     {
       name: "Mobile Phones",
-      price: "₹49,999",
+      price: "49,999",
       img: "https://images.samsung.com/is/image/samsung/assets/in/explore/brand/5-best-android-mobile-phones-2022-in-india/banner-mobile-720x761-080422.jpg?$720_N_JPG$",
       description: "High-end smartphones with the latest features."
     },
     {
       name: "Running Shoes",
-      price: "₹2,799",
+      price: "2,799",
       img: "https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/e783e052-9360-4afb-adb8-c4e9c0f5db07/NIKE+AIR+MAX+NUAXIS.png",
       description: "Durable and stylish running shoes for all."
     }
@@ -148,7 +149,7 @@ const Welcome = () => {
       </section>
 
       {/* Featured Products */}
-      <section className="product-grid">
+      <section className="product-grid1">
         <h2>Featured Products</h2>
         <div className="products">
           {filteredProducts.length ? (
@@ -160,7 +161,7 @@ const Welcome = () => {
               >
                 <img src={product.img} alt={product.name} />
                 <h4>{product.name}</h4>
-                <p>{product.price}</p>
+                <p>₹{product.price}</p>
               </div>
             ))
           ) : (
@@ -169,29 +170,32 @@ const Welcome = () => {
         </div>
       </section>
 
+
       {/* Product Modal */}
       {selectedProduct && (
-        <div className="modal-overlay" onClick={closeProductModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <span className="close-button" onClick={closeProductModal}>
+        <div className="modal-overlay1" onClick={closeProductModal}>
+          <div className="modal-content1" onClick={(e) => e.stopPropagation()}>
+            <span className="close-button1" onClick={closeProductModal}>
               &times;
             </span>
             <img src={selectedProduct.img} alt={selectedProduct.name} />
-            <div className="modal-info">
+            <div className="info">
               <h2>{selectedProduct.name}</h2>
               <p>
-                <strong>Price:</strong> {selectedProduct.price}
+                <strong>Price:</strong> ₹{selectedProduct.price}
               </p>
               <p>{selectedProduct.description}</p>
-              <div className="modal-buttons">
+              <div className="modal-buttons1">
                 <button className="btn buy-btn" onClick={() => handleBuyNow(selectedProduct)}>Buy Now</button>
                 <button className="btn cart-btn" onClick={() => handleAddToCart(selectedProduct)}>Add to Cart</button>
               </div>
             </div>
           </div>
         </div>
+        
       )}
     </div>
+    
   );
 };
 

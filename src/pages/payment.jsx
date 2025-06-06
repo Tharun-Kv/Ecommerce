@@ -20,15 +20,32 @@ const PaymentPage = () => {
   }, []);
 
   const handlePayment = () => {
-    if (paymentMethod === "card" && cardNumber.replace(/\s+/g, '').length < 10) {
-      navigate("/error-404");
-      return;
-    }
-    setIsProcessing(true);
-    setTimeout(() => {
-      navigate("/order-confirmed", { state: { product } });
-    }, 2000);
-  };
+  if (paymentMethod === "card" && cardNumber.replace(/\s+/g, '').length < 10) {
+    navigate("/error-404");
+    return;
+  }
+
+  setIsProcessing(true);
+
+  // Simulate payment delay
+  setTimeout(() => {
+    // ✅ Get existing history or start with empty array
+    const existingOrders = JSON.parse(localStorage.getItem("orderHistory")) || [];
+
+    // ✅ Add the new order
+    const updatedOrders = [...existingOrders, {
+      ...product,
+      purchaseDate: new Date().toLocaleString(), // optional: add date
+      paymentMethod,
+    }];
+
+    // ✅ Save back to localStorage
+    localStorage.setItem("orderHistory", JSON.stringify(updatedOrders));
+
+    // ✅ Navigate to order confirmed page
+    navigate("/order-confirmed", { state: { product } });
+  }, 2000);
+};
 
   if (!product) {
     return (
@@ -60,6 +77,7 @@ const PaymentPage = () => {
           loading="lazy"
         />
         <p className="price">Amount: ₹{product.price.toLocaleString()}</p>
+        <p className="description">Details:- {product.description}</p>
       </section>
 
       <form
@@ -409,6 +427,8 @@ const PaymentPage = () => {
           color: var(--primary-color);
           font-size: 1.1rem;
         }
+          .description{
+          text-align: center;}
       `}</style>
     </main>
   );

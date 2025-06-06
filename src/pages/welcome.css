@@ -167,12 +167,17 @@
 }
 
 /* Products */
-.product-grid {
-  display:inline-block;
+.product-grid1 {
   padding: 30px 20px;
+   display: flex;
+   align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
 }
 
-.product-grid h2 {
+.product-grid1 h2 {
   margin-bottom: 20px;
   color: #222;
 }
@@ -212,7 +217,7 @@
 }
 
 /* Modal */
-.modal-overlay {
+.modal-overlay1 {
   position: fixed;
   top: 0;
   left: 0;
@@ -225,7 +230,7 @@
   z-index: 1000;
 }
 
-.modal-content {
+.modal-content1 {
   display: flex;
   background: #fff;
   border-radius: 10px;
@@ -236,14 +241,14 @@
   position: relative;
 }
 
-.modal-content img {
+.modal-content1 img {
   width: 300px;
   height: auto;
   border-radius: 10px;
   object-fit: cover;
 }
 
-.modal-info {
+.info {
   flex: 1;
   margin-left: 20px;
   display: flex;
@@ -251,23 +256,23 @@
   justify-content: center;
 }
 
-.modal-info h2 {
+.info h2 {
   font-size: 24px;
 }
 
-.modal-info p {
+.info p {
   margin: 10px 0;
   font-size: 16px;
 }
 
-.modal-buttons {
+.modal-buttons1 {
   margin-top: 20px;
   display: flex;
   gap: 10px;
   justify-content: center;
 }
 
-.modal-buttons .btn {
+.modal-buttons1 .btn {
   padding: 10px 16px;
   font-weight: bold;
   border: none;
@@ -285,7 +290,7 @@
   color: black;
 }
 
-.close-button {
+.close-button1 {
   position: absolute;
   top: 10px;
   right: 15px;

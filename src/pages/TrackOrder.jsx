@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
 const TrackOrder = () => {
   const [orderId, setOrderId] = useState("");
   const [email, setEmail] = useState("");
 
   const handleTrackOrder = () => {
-    alert(`Tracking Order:\nOrder ID: ${orderId}\nEmail: ${email}`);
+    alert(`Tracking Order: you order is packed and ready to go \nOrder ID: ${orderId}\nEmail: ${email}`);
     
   };
 
@@ -46,9 +45,6 @@ const TrackOrder = () => {
           >
             Track Order
           </button>
-         <Link to="/welcome" style={{ textDecoration: "none", color: "inherit", padding : "652px", }}>
-                Home
-              </Link>
         </div>
       </div>
     </div>

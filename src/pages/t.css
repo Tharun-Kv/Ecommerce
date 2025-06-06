@@ -1,0 +1,58 @@
+/* src/pages/Settings.css */
+.settings-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.settings-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #03045e;
+}
+
+.settings-form .form-group {
+  margin-bottom: 20px;
+}
+
+.settings-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #023e8a;
+}
+
+.settings-form input,
+.settings-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #0077b6;
+  border-radius: 5px;
+  outline: none;
+}
+
+.settings-form button {
+  background: #00b4d8;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+  width: 100%;
+}
+
+.settings-form button:hover {
+  background: #0077b6;
+}
+
+.status {
+  margin-top: 15px;
+  color: green;
+  font-weight: bold;
+  text-align: center;
+}

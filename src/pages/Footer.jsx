@@ -24,10 +24,18 @@ const Footer = () => {
         <div>
           <h4>Policies</h4>
           <ul>
-            <li>Cancellation & Refund</li>
+            <li>
+               <Link to="/cancellationandrefund" style={{ textDecoration: "none", color: "inherit" }}>
+                Cancellation & Refund
+              </Link>
+            </li>
             <li>Terms & Conditions</li>
             <li>Shipping & Delivery</li>
-            <li>Privacy</li>
+            <li>
+              <Link to="/PrivacyPage" style={{ textDecoration: "none", color: "inherit" }}>
+                Privacy
+              </Link>
+            </li>
           </ul>
         </div>
         <div>
@@ -45,7 +53,11 @@ const Footer = () => {
         <div>
           <h4>Company</h4>
           <ul>
-            <li>About Us</li>
+            <li>
+              <Link to="/about" style={{ textDecoration: "none", color: "inherit" }}>
+                About us
+              </Link>
+            </li>
             <li>FAQs</li>
           </ul>
         </div>

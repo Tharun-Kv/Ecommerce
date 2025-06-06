@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { SearchContext } from "../pages/search";
@@ -8,6 +8,18 @@ const Header = ({ filteredProducts = [], filteredCategories = [], cart = [] }) =
   const navigate = useNavigate();
   const { searchTerm, setSearchTerm } = useContext(SearchContext);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const userRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (userRef.current && !userRef.current.contains(e.target)) {
+        setShowUserDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const categories = [
     { name: "Mobiles", link: "/category/Mobiles" },
@@ -23,9 +35,7 @@ const Header = ({ filteredProducts = [], filteredCategories = [], cart = [] }) =
   ];
 
   const filteredSuggestions = [...filteredProducts, ...filteredCategories]
-    .filter((item) =>
-      item?.name?.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    .filter((item) => item?.name?.toLowerCase().includes(searchTerm.toLowerCase()))
     .slice(0, 5);
 
   const handleSuggestionClick = (value) => {
@@ -34,9 +44,7 @@ const Header = ({ filteredProducts = [], filteredCategories = [], cart = [] }) =
   };
 
   const handleSearchSubmit = () => {
-    if (searchTerm.trim()) {
-      navigate("/search-results");
-    }
+    if (searchTerm.trim()) navigate("/search-results");
   };
 
   const AnimatedLink = ({ to, children }) => (
@@ -52,10 +60,9 @@ const Header = ({ filteredProducts = [], filteredCategories = [], cart = [] }) =
       className="nav-button"
       onClick={() => navigate(-1)}
       style={{ cursor: "pointer" }}
-      aria-label="Go back to previous page"
+      aria-label="Go back"
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') navigate(-1); }}
     >
       ← Back
     </motion.div>
@@ -78,23 +85,13 @@ const Header = ({ filteredProducts = [], filteredCategories = [], cart = [] }) =
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSearchSubmit()}
-          aria-label="Search products, brands, and more"
         />
         {searchTerm && filteredSuggestions.length > 0 && (
           <>
-            <span className="clear-search" onClick={() => setSearchTerm("")} role="button" aria-label="Clear search input" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setSearchTerm(""); }}>
-              ×
-            </span>
-            <ul className="suggestion-dropdown" role="listbox">
+            <span className="clear-search" onClick={() => setSearchTerm("")}>×</span>
+            <ul className="suggestion-dropdown">
               {filteredSuggestions.map((item, idx) => (
-                <li
-                  key={idx}
-                  onClick={() => handleSuggestionClick(item.name)}
-                  aria-selected={false}
-                  role="option"
-                  tabIndex={0}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleSuggestionClick(item.name); }}
-                >
+                <li key={idx} onClick={() => handleSuggestionClick(item.name)}>
                   {item.name}
                 </li>
               ))}
@@ -116,10 +113,7 @@ const Header = ({ filteredProducts = [], filteredCategories = [], cart = [] }) =
                 <motion.li
                   key={idx}
                   whileHover={{ scale: 1.05 }}
-                  onClick={() => window.location.href = cat.link}
-                  role="menuitem"
-                  tabIndex={0}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') window.location.href = cat.link; }}
+                  onClick={() => navigate(cat.link)}
                 >
                   {cat.name}
                 </motion.li>
@@ -130,22 +124,56 @@ const Header = ({ filteredProducts = [], filteredCategories = [], cart = [] }) =
 
         <BackButton />
 
-        <AnimatedLink to="/login">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/747/747376.png"
-            alt="Login Icon"
-            className="icon"
-          />
-          Login
-        </AnimatedLink>
         <AnimatedLink to="/cart" state={{ cart }}>
           <img
             src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png"
-            alt="Cart Logo"
+            alt="Cart"
             className="icon"
           />
-          Cart
         </AnimatedLink>
+
+        <div className="user-dropdown-wrapper" ref={userRef}>
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="nav-button"
+            onClick={() => setShowUserDropdown((prev) => !prev)}
+          >
+            <div className="user-icon">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRs_rWILOMx5-v3aXwJu7LWUhnPceiKvvDg&s"
+                alt="User Icon"
+                className="icon"
+              />
+            </div>
+          </motion.div>
+
+          {showUserDropdown && (
+            <ul className="user-dropdown">
+              <li onClick={() => navigate("/profile")}>
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile" />
+                Profile
+              </li>
+              <li onClick={() => navigate("/t")}>
+                <img src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png" alt="Settings" />
+                Settings
+              </li>
+               <li  onClick={() => navigate("/orderhistory")}>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRscX5q_zUqu8GaSJySuxFQrNPsXWWJdamZOA&s" alt="Order History"/>
+              Order history
+            </li>
+              <li
+                onClick={() => {
+                  localStorage.clear();
+                  navigate("/login");
+                }}
+              >
+                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" alt="Logout" />
+                Logout
+              </li>
+            </ul>
+          )}
+        </div>
       </div>
     </header>
   );
