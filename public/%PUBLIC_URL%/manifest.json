@@ -1,19 +1,19 @@
 {
-  "short_name": "React App",
+  "short_name": "Techverve",
   "name": "Create React App Sample",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "itech.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "ChatGPT Image Jun 7, 2025, 12_38_30 PM - Copy.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "ChatGPT Image Jun 7, 2025, 12_38_30 PM - Copy.png",
       "type": "image/png",
       "sizes": "512x512"
     }

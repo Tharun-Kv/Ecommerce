@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+  
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -23,7 +24,19 @@ const Profile = () => {
       }));
     }
   };
-
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+if (loading) {
+    return (
+      <div className="loader-container">
+        <div className="loader"></div>
+        <p>Loading your profile...</p>
+      </div>
+    );
+  }
   return (
     <div style={styles.container}>
       <h2 style={styles.heading}>My Profile</h2>

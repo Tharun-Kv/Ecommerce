@@ -1,17 +1,21 @@
 // src/pages/Settings.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./t.css";
 import { auth } from "./firebase-config";
 import { updateProfile } from "firebase/auth";
 
 const Settings = () => {
   const user = auth.currentUser;
-
+  const [loading, setLoading] = useState(true);
   const [name, setName] = useState(user?.displayName || "");
   const [email] = useState(user?.email || "");
   const [mobile, setMobile] = useState("");
   const [address, setAddress] = useState("");
   const [status, setStatus] = useState("");
+  useEffect(() => {
+      const timer = setTimeout(() => setLoading(false), 1000);
+      return () => clearTimeout(timer);
+    }, []);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -23,6 +27,14 @@ const Settings = () => {
       setStatus("Update failed. Try again.");
     }
   };
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <div className="loader"></div>
+        <p>Loading ...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="settings-container">
