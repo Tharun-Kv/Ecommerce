@@ -1,16 +1,36 @@
 // src/pages/AboutUs.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import "./about.css";
 
 const About = () => {
+  useEffect(() => {
+    const animateElements = () => {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if (elementPosition < screenPosition) {
+          element.classList.add('animated');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', animateElements);
+    animateElements(); // Run once on load
+    
+    return () => window.removeEventListener('scroll', animateElements);
+  }, []);
+
   return (
     <div className="about-container">
-      <div className="about-header">
+      <div className="about-header animate-on-scroll">
         <h1>About Our E-commerce Store</h1>
         <p>Your One-Stop Shop for Everything You Need</p>
       </div>
+      
       <div className="about-body">
-        <section>
+        <section className="animate-on-scroll">
           <h2>Who We Are</h2>
           <p>
             We are an online marketplace committed to delivering high-quality products
@@ -20,7 +40,7 @@ const About = () => {
           </p>
         </section>
 
-        <section>
+        <section className="animate-on-scroll">
           <h2>What We Offer</h2>
           <ul>
             <li>✔️ Wide range of curated products</li>
@@ -31,7 +51,7 @@ const About = () => {
           </ul>
         </section>
 
-        <section>
+        <section className="animate-on-scroll">
           <h2>Our Mission</h2>
           <p>
             To empower customers with a seamless shopping experience, competitive
