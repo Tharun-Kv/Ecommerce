@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import {
   auth,
   googleProvider,
   facebookProvider,
-  } from "./firebase-config";
+} from "./firebase-config";
 import { signInWithPopup } from "firebase/auth";
-
 import "./login.css";
 
 const Login = () => {
@@ -16,6 +15,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -38,7 +38,11 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (username === "Tharun" && password === "Tharun@17") {
+
+    const isAdmin = username === "admin" && password === "admin@123";
+    const isUser = username === "Tharun" && password === "Tharun@17";
+
+    if (isAdmin || isUser) {
       localStorage.setItem("loggedInUser", username);
       if (rememberMe) {
         localStorage.setItem("savedUsername", username);
@@ -47,7 +51,13 @@ const Login = () => {
         localStorage.removeItem("savedUsername");
         localStorage.removeItem("savedPassword");
       }
-      window.location.href = "/welcome";
+
+      // Navigate based on credentials
+      if (isAdmin) {
+        navigate("/AdminDashboard");
+      } else {
+        navigate("/welcome");
+      }
     } else {
       alert("Invalid credentials");
     }
@@ -57,7 +67,7 @@ const Login = () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       alert(`Logged in as ${result.user.displayName}`);
-      window.location.href = "/welcome";
+      navigate("/welcome");
     } catch (error) {
       console.error("Google login error:", error.message);
     }
@@ -67,7 +77,7 @@ const Login = () => {
     try {
       const result = await signInWithPopup(auth, facebookProvider);
       alert(`Logged in as ${result.user.displayName}`);
-      window.location.href = "/welcome";
+      navigate("/welcome");
     } catch (error) {
       console.error("Facebook login error:", error.message);
     }
@@ -77,7 +87,7 @@ const Login = () => {
     return (
       <div className="loader-container">
         <div className="loader"></div>
-        <p>Please wait your login page is Loading...</p>
+        <p>Please wait, your login page is loading...</p>
       </div>
     );
   }
@@ -119,7 +129,7 @@ const Login = () => {
                 type="checkbox"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
-              />{" "}
+              />
               Remember me
             </label>
             <Link to="/forgot-password" className="forgot-password-link">

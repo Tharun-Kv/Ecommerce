@@ -25,9 +25,9 @@ const dummyCategoryProducts = {
     { name: "Refrigerator", brand:"LG",price: 25999, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUx9bN1eWoW_2tTnZaPOH-zQQHIKjIArTG0g&s",   description: "LG’s Refrigerator offers spacious compartments, inverter cooling technology, and energy-saving performance. With an elegant finish and quiet operation, it keeps food fresh longer while enhancing your kitchen’s aesthetics." },
   ],
    Books: [
-     { name: "Atomic Habits", price: 599, brand: "Penguin", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdpr68FDh6xxaWIwFmu5mm3bYd0zBc503i5Q&s",  description: "Atomic Habits by James Clear teaches practical techniques to form good habits, break bad ones, and master small behaviors that lead to remarkable results. It’s a must-read for self-growth." },
-    { name: "The Psychology of Money", price: 399, brand: "Harriman House", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxNiEUY9dmXOPdrRZSc-Uzi6Qk5GXUf7sucg&s",  description: "Atomic Habits by James Clear teaches practical techniques to form good habits, break bad ones, and master small behaviors that lead to remarkable results. It’s a must-read for self-growth." },
-    { name: "Ikigai", price: 250,  brand: "ssep", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHzQ4pycumT-eihOXuWT3B8r_BwsrLVrWlyg&s",  description: "This book explores how emotions and behavior affect our financial decisions. Morgan Housel's insights into wealth, greed, and happiness help readers develop a healthier, long-term mindset about money.",   }
+     { name: "Atomic Habits", price: 599, brand: "Penguin", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ3tdnYcCKO8NuWennfZbfr86P7gIoBjl2AQ&s",  description: "Atomic Habits by James Clear teaches practical techniques to form good habits, break bad ones, and master small behaviors that lead to remarkable results. It’s a must-read for self-growth." },
+    { name: "The Psychology of Money", price: 399, brand: "Harriman House", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTzV23fyGLxpgQULqfjC00obRANbjKq9-t5A&s",  description: "Atomic Habits by James Clear teaches practical techniques to form good habits, break bad ones, and master small behaviors that lead to remarkable results. It’s a must-read for self-growth." },
+    { name: "Ikigai", price: 250,  brand: "ssep", img: "https://gyaanstore.com/cdn/shop/products/61YHrxO0EgL_6e35eec6-242e-406a-966a-0488c8deb782.jpg?v=1701690449&width=1445",  description: "This book explores how emotions and behavior affect our financial decisions. Morgan Housel's insights into wealth, greed, and happiness help readers develop a healthier, long-term mindset about money.",   }
    ],
   "Beauty products": [
     { name: "Facial Cleanser", brand:"Cetaphil", price: 499, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRelu7vWR2Kzvg07jNJtgx8TyKpCMROQVpblw&s",description: "Cetaphil’s Facial Cleanser gently removes dirt, oil, and makeup without irritating or drying out your skin. Dermatologist-recommended, it's ideal for all skin types and perfect for everyday use." },
@@ -115,7 +115,7 @@ const CategoryPage = () => {
    <div className="category-page">
   <h2>{categoryName} Products</h2>
 
-  <div className="category-layout"> {/* Flex container */}
+  <div className="category-layout"> {}
     <div className="filters">
       <h4>Filter by Brand</h4>
       {brands.map((brand, index) => (

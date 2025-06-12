@@ -17,7 +17,8 @@ import Cancellationandrefund from "./pages/cancellationandrefund";
 import Profile from "./pages/Profile";
 import OrderHistory from "./pages/orderhistory";
 import Settings from  "./pages/t";
-
+import AdminDashboard from "./pages/AdminDashboard";
+import OrderInvoice from "./pages/OrderInvoice";
 const App = () => {
   return (
     <Router>
@@ -27,9 +28,11 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
 
           {/* 👇 Redirect root path to login */}
-          <Route path="/" element={<Navigate to="/login" />} />
-
+         
+           <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/AdminDashboard" element={<AdminDashboard />} />
           <Route element={<Layout />}>
+           <Route path="/OrderInvoice" element={<OrderInvoice />} /> 
          <Route path="/orderhistory" element={<OrderHistory />} />
           <Route path="/t" element ={<Settings />} />
            <Route path="/profile" element={<Profile />}  />

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ref, push } from "firebase/database";
+import { db, getAuth } from "./firebase-config"; // Added getAuth import
 
 const PaymentPage = () => {
   const location = useLocation();
@@ -13,39 +15,81 @@ const PaymentPage = () => {
   const [cardHolder, setCardHolder] = useState("");
   const [expiry, setExpiry] = useState("");
   const [cvv, setCvv] = useState("");
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1800);
     return () => clearTimeout(timer);
   }, []);
 
-  const handlePayment = () => {
-  if (paymentMethod === "card" && cardNumber.replace(/\s+/g, '').length < 10) {
-    navigate("/error-404");
-    return;
-  }
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (paymentMethod === "card") {
+      if (cardNumber.replace(/\s+/g, '').length < 16) {
+        newErrors.cardNumber = "Card number must be at least 16 digits";
+      }
+      if (!cardHolder.trim()) {
+        newErrors.cardHolder = "Card holder name is required";
+      }
+      if (!expiry.match(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/)) {
+        newErrors.expiry = "Invalid expiry date (MM/YY)";
+      }
+      if (!cvv.match(/^[0-9]{3,4}$/)) {
+        newErrors.cvv = "CVV must be 3 or 4 digits";
+      }
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-  setIsProcessing(true);
+  const handlePayment = async () => {
+    if (!validateForm()) return;
 
-  // Simulate payment delay
-  setTimeout(() => {
-    // ✅ Get existing history or start with empty array
-    const existingOrders = JSON.parse(localStorage.getItem("orderHistory")) || [];
+    try {
+      setIsProcessing(true);
+      const auth = getAuth();
+      const user = auth.currentUser;
 
-    // ✅ Add the new order
-    const updatedOrders = [...existingOrders, {
-      ...product,
-      purchaseDate: new Date().toLocaleString(), // optional: add date
-      paymentMethod,
-    }];
+      const paymentsRef = ref(db, "payments");
+      await push(paymentsRef, {
+        userId: user?.uid || "guest",
+        userName: "Tharun",
+        amount: product.price,
+        productName: product.name,
+        productImage: product.img,
+        time: new Date().toISOString(),
+        method: paymentMethod,
+        status: "completed"
+      });
 
-    // ✅ Save back to localStorage
-    localStorage.setItem("orderHistory", JSON.stringify(updatedOrders));
-
-    // ✅ Navigate to order confirmed page
-    navigate("/order-confirmed", { state: { product } });
-  }, 2000);
-};
+      setTimeout(() => {
+        navigate("/order-confirmed", {
+          state: { product }
+        });
+      }, 2000);
+    } catch (error) {
+      console.error("Payment error:", error);
+      alert("Payment failed. Please try again.");
+      setIsProcessing(false);
+    }
+  };
+  const formatCardNumber = (value) => {
+    const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    const matches = v.match(/\d{4,16}/g);
+    const match = (matches && matches[0]) || ''; // Fixed mixed operators warning
+    const parts = [];
+    
+    for (let i = 0, len = match.length; i < len; i += 4) {
+      parts.push(match.substring(i, i + 4));
+    }
+    
+    if (parts.length) {
+      return parts.join(' ');
+    }
+    return value;
+  };
 
   if (!product) {
     return (
@@ -106,56 +150,79 @@ const PaymentPage = () => {
 
         {paymentMethod === "card" && (
           <fieldset className="card-details" aria-label="Credit or debit card details">
-            <input
-              type="text"
-              placeholder="Card Number"
-              value={cardNumber}
-              onChange={(e) => setCardNumber(e.target.value)}
-              className="input"
-              name="cardNumber"
-              inputMode="numeric"
-              pattern="[0-9\s]{13,19}"
-              maxLength={19}
-              required
-              aria-required="true"
-              autoComplete="cc-number"
-            />
-            <input
-              type="text"
-              placeholder="Card Holder Name"
-              value={cardHolder}
-              onChange={(e) => setCardHolder(e.target.value)}
-              className="input"
-              name="cardHolder"
-              required
-              aria-required="true"
-              autoComplete="cc-name"
-            />
-            <div className="half-inputs">
+            <div className="input-group">
               <input
                 type="text"
-                placeholder="Expiry (MM/YY)"
-                value={expiry}
-                onChange={(e) => setExpiry(e.target.value)}
-                className="input half"
-                name="expiry"
-                pattern="(0[1-9]|1[0-2])\/?([0-9]{2})"
+                placeholder="Card Number"
+                value={formatCardNumber(cardNumber)}
+                onChange={(e) => setCardNumber(e.target.value.replace(/\s+/g, ''))}
+                className={`input ${errors.cardNumber ? 'error' : ''}`}
+                name="cardNumber"
+                inputMode="numeric"
+                pattern="[0-9\s]{13,19}"
+                maxLength={19}
                 required
                 aria-required="true"
-                autoComplete="cc-exp"
+                autoComplete="cc-number"
+                aria-invalid={!!errors.cardNumber}
+                aria-describedby={errors.cardNumber ? "cardNumberError" : undefined}
               />
+              {errors.cardNumber && <span id="cardNumberError" className="error-message">{errors.cardNumber}</span>}
+            </div>
+            
+            <div className="input-group">
               <input
-                type="password"
-                placeholder="CVV"
-                value={cvv}
-                onChange={(e) => setCvv(e.target.value)}
-                className="input half"
-                name="cvv"
-                maxLength={4}
+                type="text"
+                placeholder="Card Holder Name"
+                value={cardHolder}
+                onChange={(e) => setCardHolder(e.target.value)}
+                className={`input ${errors.cardHolder ? 'error' : ''}`}
+                name="cardHolder"
                 required
                 aria-required="true"
-                autoComplete="cc-csc"
+                autoComplete="cc-name"
+                aria-invalid={!!errors.cardHolder}
+                aria-describedby={errors.cardHolder ? "cardHolderError" : undefined}
               />
+              {errors.cardHolder && <span id="cardHolderError" className="error-message">{errors.cardHolder}</span>}
+            </div>
+            
+            <div className="half-inputs">
+              <div className="input-group">
+                <input
+                  type="text"
+                  placeholder="Expiry (MM/YY)"
+                  value={expiry}
+                  onChange={(e) => setExpiry(e.target.value)}
+                  className={`input half ${errors.expiry ? 'error' : ''}`}
+                  name="expiry"
+                  pattern="(0[1-9]|1[0-2])\/?([0-9]{2})"
+                  required
+                  aria-required="true"
+                  autoComplete="cc-exp"
+                  aria-invalid={!!errors.expiry}
+                  aria-describedby={errors.expiry ? "expiryError" : undefined}
+                />
+                {errors.expiry && <span id="expiryError" className="error-message">{errors.expiry}</span>}
+              </div>
+              
+              <div className="input-group">
+                <input
+                  type="password"
+                  placeholder="CVV"
+                  value={cvv}
+                  onChange={(e) => setCvv(e.target.value)}
+                  className={`input half ${errors.cvv ? 'error' : ''}`}
+                  name="cvv"
+                  maxLength={4}
+                  required
+                  aria-required="true"
+                  autoComplete="cc-csc"
+                  aria-invalid={!!errors.cvv}
+                  aria-describedby={errors.cvv ? "cvvError" : undefined}
+                />
+                {errors.cvv && <span id="cvvError" className="error-message">{errors.cvv}</span>}
+              </div>
             </div>
           </fieldset>
         )}
@@ -222,6 +289,7 @@ const PaymentPage = () => {
           --input-border: #ced4da;
           --input-focus: #0d6efd;
           --text-color: #212529;
+          --error-color: #dc3545;
           --shadow-light: rgba(13, 110, 253, 0.25);
           --shadow-strong: rgba(13, 110, 253, 0.5);
           --border-radius: 8px;
@@ -338,11 +406,13 @@ const PaymentPage = () => {
         /* Card inputs */
         .card-details {
           margin-top: 20px;
+          border: none;
+          padding: 0;
         }
         .input {
           width: 100%;
           padding: 14px 16px;
-          margin-bottom: 16px;
+          margin-bottom: 8px;
           border-radius: var(--border-radius);
           border: 1.5px solid var(--input-border);
           background-color: var(--input-bg);
@@ -350,6 +420,9 @@ const PaymentPage = () => {
           transition: border-color var(--transition), box-shadow var(--transition);
           box-sizing: border-box;
           outline-offset: 2px;
+        }
+        .input.error {
+          border-color: var(--error-color);
         }
         .input:focus {
           border-color: var(--input-focus);
@@ -362,6 +435,16 @@ const PaymentPage = () => {
         }
         .half {
           flex: 1;
+        }
+        .input-group {
+          margin-bottom: 12px;
+        }
+        .error-message {
+          color: var(--error-color);
+          font-size: 0.85rem;
+          margin-top: -4px;
+          margin-bottom: 8px;
+          display: block;
         }
 
         /* Sections */
@@ -427,8 +510,9 @@ const PaymentPage = () => {
           color: var(--primary-color);
           font-size: 1.1rem;
         }
-          .description{
-          text-align: center;}
+        .description {
+          text-align: center;
+        }
       `}</style>
     </main>
   );
