@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"; // 👈 Added Navigate
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom"; // 👈 Added Navigate
 import Login from "./pages/Login";
 import Signup from "./pages/signup";
 import Terms from "./pages/terms";
