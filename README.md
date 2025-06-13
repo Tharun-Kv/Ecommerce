@@ -4,7 +4,7 @@ A modern, responsive e-commerce website built using **ReactJS**, **TailwindCSS**
 
 ## 🔗 Live Demo
 
-👉 [Click here to view the live site](https://your-live-site-link.com)
+👉 [Click here to view the live site]((https://tharun-kv.github.io/Ecommerce/))
 
 ---
 
