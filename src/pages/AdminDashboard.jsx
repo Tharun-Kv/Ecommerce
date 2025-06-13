@@ -16,7 +16,9 @@ const AdminDashboard = () => {
   const handleCardClick = (view) => {
     setActiveView(view);
   };
-
+const handle = (view) => {
+    navigate("/adminuser");
+  };
   const closeActiveView = () => {
     setActiveView(null);
   };
@@ -59,7 +61,7 @@ const handlecard = (view) => {
             <p>View, add or remove admin accounts</p>
           </div>
 
-          <div className="admin-card" onClick={() => handleCardClick("users")}>
+          <div className="admin-card" onClick={() => handle("users")}>
             <FaUsers className="admin-icon" />
             <h3>Manage Users</h3>
             <p>Control user access and permissions</p>

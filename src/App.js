@@ -20,6 +20,8 @@ import Settings from  "./pages/t";
 import AdminDashboard from "./pages/AdminDashboard";
 import OrderInvoice from "./pages/OrderInvoice";
 import Analyze from"./pages/Analyze";
+import AdminUsers from "./pages/adminuser";
+
 const App = () => {
   return (
     <Router>
@@ -48,7 +50,8 @@ const App = () => {
             <Route path="/order-confirmed" element={<OrderConfirmed />} />
             <Route path="/error-404" element={<Error404 />} />
             <Route path="/Analyze" element={<Analyze />} />
-          </Route>
+            <Route path="/adminuser"element={<AdminUsers />}   />
+           </Route>
         </Routes>
       </SearchProvider>
     </Router>

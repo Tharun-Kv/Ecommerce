@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import {
-  auth,
-  googleProvider,
-  facebookProvider,
+import { 
+  auth, db,
+  googleProvider, 
+  facebookProvider 
 } from "./firebase-config";
 import { signInWithPopup } from "firebase/auth";
+import { ref, set, get } from "firebase/database"; // Correct import source
 import "./login.css";
 
 const Login = () => {
@@ -36,13 +37,35 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleLogin = (e) => {
+  const recordLogin = async (userId, userData) => {
+    try {
+      const userRef = ref(db, `users/${userId}`);
+      const snapshot = await get(userRef);
+      const currentCount = snapshot.exists() ? snapshot.val().loginCount || 0 : 0;
+      
+      await set(userRef, {
+        ...userData,
+        lastLogin: new Date().toISOString(),
+        loginCount: currentCount + 1
+      });
+    } catch (error) {
+      console.error("Error recording login:", error);
+    }
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     const isAdmin = username === "admin" && password === "admin@123";
     const isUser = username === "Tharun" && password === "Tharun@17";
 
     if (isAdmin || isUser) {
+      const userId = isAdmin ? "admin" : "tharun";
+      await recordLogin(userId, {
+        username,
+        isAdmin
+      });
+
       localStorage.setItem("loggedInUser", username);
       if (rememberMe) {
         localStorage.setItem("savedUsername", username);
@@ -52,34 +75,25 @@ const Login = () => {
         localStorage.removeItem("savedPassword");
       }
 
-      // Navigate based on credentials
-      if (isAdmin) {
-        navigate("/AdminDashboard");
-      } else {
-        navigate("/welcome");
-      }
+      navigate(isAdmin ? "/AdminDashboard" : "/welcome");
     } else {
       alert("Invalid credentials");
     }
   };
 
-  const handleGoogleLogin = async () => {
+  const handleSocialLogin = async (provider) => {
     try {
-      const result = await signInWithPopup(auth, googleProvider);
-      alert(`Logged in as ${result.user.displayName}`);
-      navigate("/welcome");
-    } catch (error) {
-      console.error("Google login error:", error.message);
-    }
-  };
+      const result = await signInWithPopup(auth, provider);
+      await recordLogin(result.user.uid, {
+        email: result.user.email,
+        displayName: result.user.displayName,
+        provider: provider === googleProvider ? "google" : "facebook"
+      });
 
-  const handleFacebookLogin = async () => {
-    try {
-      const result = await signInWithPopup(auth, facebookProvider);
       alert(`Logged in as ${result.user.displayName}`);
       navigate("/welcome");
     } catch (error) {
-      console.error("Facebook login error:", error.message);
+      console.error("Social login error:", error.message);
     }
   };
 
@@ -144,10 +158,18 @@ const Login = () => {
           <div className="divider"><span>or</span></div>
 
           <div className="social-login-buttons">
-            <button type="button" className="icon-button" onClick={handleGoogleLogin}>
+            <button 
+              type="button" 
+              className="icon-button" 
+              onClick={() => handleSocialLogin(googleProvider)}
+            >
               <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
             </button>
-            <button type="button" className="icon-button" onClick={handleFacebookLogin}>
+            <button 
+              type="button" 
+              className="icon-button" 
+              onClick={() => handleSocialLogin(facebookProvider)}
+            >
               <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook" />
             </button>
           </div>
