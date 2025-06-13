@@ -1,0 +1,25 @@
+{
+  "short_name": "Techverve",
+  "name": "Create React App Sample",
+  "icons": [
+    {
+      "src": "itech.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "ChatGPT Image Jun 7, 2025, 12_38_30 PM - Copy.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "ChatGPT Image Jun 7, 2025, 12_38_30 PM - Copy.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
