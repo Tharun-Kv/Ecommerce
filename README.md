@@ -61,8 +61,8 @@ REACT_APP_MESSAGING_SENDER_ID=your_messaging_id
 REACT_APP_APP_ID=your_app_id
 
 👨‍💻 Author
-Tharun K V
-📧 tharunkv742004@gmail.com
-📍 Maddur, Mandya District, Karnataka
+Tharun K V                                                                                                                                                  
+📧 tharunkv742004@gmail.com                                                                                                                                
+📍 Maddur, Mandya District, Karnataka                                                                                                                       
 🔗 GitHub
 
