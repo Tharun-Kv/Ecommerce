@@ -70,7 +70,7 @@ const Header = ({ filteredProducts = [], filteredCategories = [], cart = [] }) =
 
   return (
     <header className="header">
-      <div className="logo" onClick={() => navigate("/")}>Ecommers</div>
+      <div className="logo" onClick={() => navigate("/")}>Techverve Store</div>
 
       <div className="search-bar">
         <img

@@ -34,6 +34,9 @@ const App = () => {
          
            <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/AdminDashboard" element={<AdminDashboard />} />
+            <Route path="/Analyze" element={<Analyze />} />
+            <Route path="/adminuser"element={<AdminUsers />}   />
+
           <Route element={<Layout />}>
            <Route path="/OrderInvoice" element={<OrderInvoice />} /> 
          <Route path="/orderhistory" element={<OrderHistory />} />
@@ -49,8 +52,7 @@ const App = () => {
             <Route path="/category/:categoryName" element={<CategoryPage />} />
             <Route path="/order-confirmed" element={<OrderConfirmed />} />
             <Route path="/error-404" element={<Error404 />} />
-            <Route path="/Analyze" element={<Analyze />} />
-            <Route path="/adminuser"element={<AdminUsers />}   />
+            
            </Route>
         </Routes>
       </SearchProvider>

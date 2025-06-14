@@ -104,8 +104,8 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <span className="footer-logo">THARUN</span>
-        <p>© Ecommrece 2025 • All rights reserved</p>
+        <span className="footer-logo">Techverve private limited</span>
+        <p>© Techverve store 2025 • All rights reserved</p>
       </div>
     </footer>
   );
