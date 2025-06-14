@@ -48,8 +48,8 @@ const Header = ({ filteredProducts = [], filteredCategories = [], cart = [] }) =
   };
 
   const AnimatedLink = ({ to, children }) => (
-    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="nav-button">
-      <Link to={to} className="nav-link">{children}</Link>
+    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="nav-button1">
+      <Link to={to} className="nav-link1">{children}</Link>
     </motion.div>
   );
 
@@ -57,7 +57,7 @@ const Header = ({ filteredProducts = [], filteredCategories = [], cart = [] }) =
     <motion.div
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      className="nav-button"
+      className="nav-button1"
       onClick={() => navigate(-1)}
       style={{ cursor: "pointer" }}
       aria-label="Go back"
@@ -69,14 +69,14 @@ const Header = ({ filteredProducts = [], filteredCategories = [], cart = [] }) =
   );
 
   return (
-    <header className="header">
-      <div className="logo" onClick={() => navigate("/")}>Techverve Store</div>
+    <header className="header1">
+      <div className="logo1" onClick={() => navigate("/")}>Techverve Store</div>
 
-      <div className="search-bar">
+      <div className="search-bar1">
         <img
           src="https://cdn-icons-png.flaticon.com/512/622/622669.png"
           alt="Search Icon"
-          className="search-icon"
+          className="search-icon1"
           onClick={handleSearchSubmit}
         />
         <input
@@ -88,8 +88,8 @@ const Header = ({ filteredProducts = [], filteredCategories = [], cart = [] }) =
         />
         {searchTerm && filteredSuggestions.length > 0 && (
           <>
-            <span className="clear-search" onClick={() => setSearchTerm("")}>×</span>
-            <ul className="suggestion-dropdown">
+            <span className="clear-search1" onClick={() => setSearchTerm("")}>×</span>
+            <ul className="suggestion-dropdown1">
               {filteredSuggestions.map((item, idx) => (
                 <li key={idx} onClick={() => handleSuggestionClick(item.name)}>
                   {item.name}
@@ -100,15 +100,15 @@ const Header = ({ filteredProducts = [], filteredCategories = [], cart = [] }) =
         )}
       </div>
 
-      <div className="nav-links">
+      <div className="nav-links1">
         <div
-          className="category-wrapper"
+          className="category-wrapper1"
           onMouseEnter={() => setShowDropdown(true)}
           onMouseLeave={() => setShowDropdown(false)}
         >
           <AnimatedLink to="#">Category</AnimatedLink>
           {showDropdown && (
-            <ul className="category-dropdown">
+            <ul className="category-dropdown1">
               {categories.map((cat, idx) => (
                 <motion.li
                   key={idx}
@@ -128,28 +128,28 @@ const Header = ({ filteredProducts = [], filteredCategories = [], cart = [] }) =
           <img
             src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png"
             alt="Cart"
-            className="icon"
+            className="icon1"
           />
         </AnimatedLink>
 
-        <div className="user-dropdown-wrapper" ref={userRef}>
+        <div className="user-dropdown-wrapper1" ref={userRef}>
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="nav-button"
+            className="nav-button1"
             onClick={() => setShowUserDropdown((prev) => !prev)}
           >
-            <div className="user-icon">
+            <div className="user-icon1">
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRs_rWILOMx5-v3aXwJu7LWUhnPceiKvvDg&s"
                 alt="User Icon"
-                className="icon"
+                className="icon1"
               />
             </div>
           </motion.div>
 
           {showUserDropdown && (
-            <ul className="user-dropdown">
+            <ul className="user-dropdown1">
               <li onClick={() => navigate("/profile")}>
                 <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile" />
                 Profile
