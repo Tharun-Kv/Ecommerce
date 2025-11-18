@@ -4,7 +4,7 @@ A modern, responsive e-commerce website built using **ReactJS**, **TailwindCSS**
 
 ## 🔗 Live Demo
 
-👉 [Click here to view the live site](https://tharun-kv.github.io/Ecommerce/)
+👉 [Click here to view the live site]([https://tharun-kv.github.io/Ecommerce/](https://smart-e-commerce-app.netlify.app/))
 
 ---
 
